@@ -9,6 +9,7 @@
 	echo "People: <br>";
 	printTable($connection);
 	unConnect($connection);
+	
 	function connect(){
 		$dbhost = "localhost";
 		$dbuser = "root";
