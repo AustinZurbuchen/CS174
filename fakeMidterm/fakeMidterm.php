@@ -39,7 +39,7 @@
 
 		function associativeArray(){
 			$array = array('array' => array(5, 6),
-							'bool' => "true");
+							'bool' => true);
 			return $array;
 		}
 	?>
