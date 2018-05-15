@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<title>Login:</title>
+	<script>
+	function validateForm(form){
+		fail = validateUsername(form.username.value);
+		fail += validatePassword(form.password.value);
+		fail += validateEmail(form.email.value);
+
+		if(fail == "")
+			alert("Validation Successful");
+			return true;
+		else {
+			alert(fail);
+			return false;
+		}
+	}
+
+	function validateUsername(field){
+		if(field == "") 
+			return "No Username was entered \n";
+		else if (field.length < 6){
+			return "Usernames need to be at least 6 characters. \n";
+		} else if (/[^a-zA-Z0-9_-]/.test(field))
+			return "Only a-z, A-Z, 0-9, - and _ allowed in Usernames.\n";
+		return "";
+	}
+
+	function validatePassword(field){
+		if(field == "")
+			return "No password was entered.\n";
+		else if(field.length < 6)
+			return " Passwords need to be at least 6 characters. \n";
+		else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) || !/[0-9]/.test(field))
+			return "Passwords require at least one lowercase letter, one uppercase letter, and one number 0-9.\n";
+		return "";
+	}
+
+	function validateEmail(field){
+		if(field == "")
+			return "No Email was entered. \n";
+		else if(!((field.indexOf(".") > 0) && (field.indexOf("@") > 0) || /[^a-zA-Z0-9.@_-]/.test(field))
+			return "The Email address is invalid.\n"
+		return "";
+	}
+	</script>
+
+	<table border="0" cellpadding="2" cellspacing="5" bgcolor="#eeeeee">
+		<th colspan="2" align="center">Signup Form</th>
+		<form method="post" action="userValidate.php" onsubmit="return validate(this)">
+			<tr><td>Username</td>
+				<td><input type="text" maxlength="16" name="username"></td></tr>
+			<tr><td>Password</td>
+				<td><input type="text" maxlength="12" name="password"></td></tr>
+			<tr><td>Email</td>
+				<td><input type="text" maxlength="64" name="email"></td></tr>
+			<tr><td colspan="2" align="center"><input type="submit"value="Signup"></td></tr>
+		</form>
+	</table>
+
+</body>
+</html>

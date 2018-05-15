@@ -12,7 +12,7 @@
 	function connect(){
 		$dbhost = "localhost";
 		$dbuser = "root";
-		$dbpass = "1234";
+		$dbpass = "root";
 		$db = "testing";
 
 		$connect = new mysqli($dbhost, $dbuser, $dbpass, $db) or die("Connect failed: %s\n". $connect -> error);

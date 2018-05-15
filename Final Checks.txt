@@ -1,0 +1,29 @@
+PHP
+Is HTML correctly withing PHP?
+Is my cod using Global Variables? if it is, am I sure that I need them?
+Am I sanitizing all the superglobal Variables?
+	Do I remember what a Superglobal variable is?
+In case, am I sing equality and identity correctly?
+Did I forget "phpinfo" within the web-ready code?
+In case I'm using classes, am I declaring properties explicitly?
+Am I doing File Handling correctly?
+For example, am I reading the file as binary or text?
+If I'm accessing files on the server, am I locking them?
+Am I doind FIle uploading correctly?
+Am I sanitizing all the text inputs (like "names")?
+Am I using regex to do it?
+Am I initializing any variable before using it? (register_globals...)
+Is Authentication working properly?
+What is happening to my cookies?
+And what about Sessions?
+Are my sessions safe against Packet Sniffing and Session Fixation?
+
+MySQL
+Are the types used in the database using the least amount of byte for the amount of data?
+Am I using the right primary key? index - auto incrament
+Are the passwords stored properly?
+
+PHP+MySQL
+Am I using a login file? Am I "including" it correctly?
+Am I leaving connections opened?
+Is my web application safe against SQL Injection and Cross-Site Scripting? (XSS)
