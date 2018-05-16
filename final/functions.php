@@ -37,4 +37,25 @@ function extractFileSignature($file){
 	}
 }
 
+function extractTestFileSignature($file){
+	$extInfo = pathinfo($file);
+	if($extInfo["extension"] == ""){
+		alert("Please upload a file to be scanned!");
+	} else {
+		$fileOpen = fopen($file, "rb");
+		$size = filesize($file);
+		$contents = fread($fileOpen, $size);
+		fclose($fileOpen);
+		$bitStorage = "";
+		for($i = 0; $i < $size; $i++){
+			$char = $contents[$i];
+			$baseTen = ord($char);
+			$bin = base_convert($baseTen, 10, 2);
+			$hex = base_convert($bin, 2, 16);
+			$bitStorage .= $hex;
+		}
+		return $bitStorage;
+	}
+}
+
 ?>

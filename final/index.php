@@ -34,45 +34,51 @@ if(isset($_POST["submit"]) != ""){
 		if(!empty($name)){
 			$location = "";
 			if(move_uploaded_file($temp, $location.$name)){
-				$hashSignature = extractFileSignature($name);
+				$hashSignature = extractTestFileSignature($name);
 				alert("Upload Completed!");
 			} else {
 				alert("Upload Failed!");
 			}
 		}
 
-		$query = $conn->query("SELECT * FROM virustable WHERE filesignature = '$hashSignature'") or die($conn->error);
-		$row = mysqli_fetch_array($query);
-		if(strcasecmp(trim($hashSignature), trim($row["filesignature"])) == 0){
-			alert("THREAT DETECTED! FILE COMPROMIZED!");
-			$nameToUpper = ucwords($name);
-			$typeToUpper = ucwords($row["type"]);
-			?>
+		//$query = $conn->query("SELECT * FROM virustable WHERE filesignature = '$hashSignature'") or die($conn->error);
+		$query = $conn->query("SELECT * FROM virustable") or die($conn->error);
+		$threat = false;
+		while($row = $query->fetch_array()){
+			if(strpos(trim($hashSignature), trim($row["filesignature"])) !== false){
+				alert("THREAT DETECTED! FILE COMPROMIZED!");
+				$nameToUpper = ucwords($name);
+				$typeToUpper = ucwords($row["type"]);
+				?>
 
-			<center><?php echo $nameToUpper; ?> was scanned successfully - Threat Detected! </center>
-			<h5><font style="color:grey"><center>Scanned File Details</center></font></h5>
-			<center><table>
-				<thread>
-					<tr>
-						<th>FILE NAME</th>
-						<th>VIRUS TYPE</th>
-						<th>THREAT</th>
-					</tr>
-				</thread>
-				<tbody>
-					<tr>
-						<td><font style="color:red"><?php echo $nameToUpper; ?></font></td>
-						<td><font style="color:red"><?php echo $typeToUpper; ?></font></td>
-						<td><font style="color:red">Yes</font></td>
-					</tr>
-				</tbody>
-			</table></center>
-		<?php
-		} else {
+				<center><?php echo $nameToUpper; ?> was scanned successfully - Threat Detected! </center>
+				<h5><font style="color:grey"><center>Scanned File Details</center></font></h5>
+				<center><table>
+					<thread>
+						<tr>
+							<th>FILE NAME</th>
+							<th>VIRUS TYPE</th>
+							<th>THREAT</th>
+						</tr>
+					</thread>
+					<tbody>
+						<tr>
+							<td><font style="color:red"><?php echo $nameToUpper; ?></font></td>
+							<td><font style="color:red"><?php echo $typeToUpper; ?></font></td>
+							<td><font style="color:red">Yes</font></td>
+						</tr>
+					</tbody>
+				</table></center>
+			<?php
+			$threat = true;
+			break;
+			}
+		}
+		if(!$threat){
 			$nameToUpper = ucwords($name);
 			?>
 			<center><?php echo $nameToUpper; ?> was scanned successfully - No Threats Detected! </center>
-		<?php
+			<?php
 		}
 	}
 }

@@ -17,7 +17,7 @@ if(isset($_POST["submitManualFileSignature"]) != ""){
 	$result = $conn->query($query);
 
 	if($result){
-		alerty("File Signature was successfully uploaded to the database!");
+		alert("File Signature was successfully uploaded to the database!");
 	} else {
 		alert("File ulpoad failed!");
 	}
@@ -32,7 +32,7 @@ if(isset($_POST["submit"]) != ""){
 
 	if(isset($name)){
 		if(!empty($name)){
-			fileArchiveCreator();
+			//fileArchiveCreator();
 			$location = "";
 			if(move_uploaded_file($temp, $location.$name)){
 				$hashSigAdmin = extractFileSignature($name);
@@ -43,7 +43,7 @@ if(isset($_POST["submit"]) != ""){
 				if($result){
 					alert("Success - your file is scanning!");
 					alert("File signature has been uploaded to the database: ".$hashSigAdmin);
-					rename("$name", "fileArchives/$name");
+					//rename("$name", "fileArchives/$name");
 				} else {
 					alert("Failed to upload the file signature.");
 				}
